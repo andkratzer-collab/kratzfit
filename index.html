@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0a66d6">
 <title>KratzFit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html,body{height:100%}
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);
-    min-height:100%;padding:0 0 calc(var(--navh) + 30px);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    min-height:100%;padding:0;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   .wrap{max-width:480px;margin:0 auto;padding:0 16px}
 
   /* Topbar */
@@ -37,7 +37,7 @@
 
   /* Tab-Inhalte */
   .tabview{display:none}
-  .tabview.active{display:block}
+  .tabview.active{display:block;padding-bottom:calc(var(--navh) + 56px + env(safe-area-inset-bottom,0px))}
 
   /* Ring */
   .progress{display:flex;align-items:center;gap:18px;padding:18px;margin-top:14px}
@@ -73,7 +73,14 @@
   .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
   .chip{font-size:11px;font-weight:600;color:var(--ink2);background:var(--bg);border:1px solid var(--line);
     padding:3px 8px;border-radius:20px}
+  .chip small{font-weight:500;color:var(--muted)}
   .chip.done{color:var(--green);border-color:rgba(47,191,113,.4);background:rgba(47,191,113,.08)}
+  .chip.done small{color:var(--green);opacity:.7}
+  .pcard.col{display:block;padding:0}
+  .pcard.col .prow{display:flex;align-items:center;gap:13px;padding:14px 16px}
+  .todos{padding:0 16px 14px 16px;display:flex;flex-direction:column;gap:5px}
+  .todo{font-size:12px;color:var(--ink2);background:var(--bg);border-radius:10px;padding:7px 10px;font-weight:500}
+  .todo.done{color:var(--green);background:rgba(47,191,113,.08);text-decoration:line-through;opacity:.7}
   .kraft{margin-top:14px;padding:0;overflow:hidden}
   .kraft .kh{padding:14px 16px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
   .kraft ul{list-style:none;padding:8px 16px 14px}
@@ -134,7 +141,8 @@
   .save:disabled{opacity:.5}
 
   /* Bottom-Nav */
-  .nav{position:fixed;left:0;right:0;bottom:0;height:var(--navh);background:#fff;border-top:1px solid var(--line);
+  .nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--navh) + env(safe-area-inset-bottom,0px));
+    padding-bottom:env(safe-area-inset-bottom,0px);background:#fff;border-top:1px solid var(--line);
     display:flex;z-index:40;box-shadow:0 -2px 12px rgba(20,40,60,.05)}
   .nav .inner{max-width:480px;margin:0 auto;display:flex;width:100%}
   .nav button{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;
@@ -278,28 +286,28 @@ var PHASES = [
   {to:12, name:'Phase 3 · Routine festigen'}
 ];
 
-/* mode 'strict' = jede Sportart einzeln zählen (Erwachsene)
-   mode 'any'    = alle Bewegungen zählen aufs Gesamtziel (Kinder) */
+/* mode 'strict' = jede Sportart einzeln zählen (Erwachsene), mit Dauer je Einheit
+   mode 'any'    = alle Bewegungen zählen aufs Gesamtziel (Kinder), mit konkreten Vorschlägen */
 var PROGRAM = {
   'Andreas':{mode:'strict', goal:'Allgemeine Fitness & Energie', phases:[
-    [{act:'Rudern',times:1},{act:'Schwimmen',times:1},{act:'Kraft',times:1}],
-    [{act:'Rudern',times:2},{act:'Schwimmen',times:1},{act:'Kraft',times:1}],
-    [{act:'Rudern',times:2},{act:'Schwimmen',times:2},{act:'Kraft',times:1}]
+    [{act:'Rudern',times:1,dur:'10 Min locker'},{act:'Schwimmen',times:1,dur:'15 Min'},{act:'Kraft',times:1,dur:'~15 Min'}],
+    [{act:'Rudern',times:2,dur:'15 Min'},{act:'Schwimmen',times:1,dur:'20 Min'},{act:'Kraft',times:1,dur:'~20 Min'}],
+    [{act:'Rudern',times:2,dur:'20 Min, Intervalle'},{act:'Schwimmen',times:2,dur:'25 Min'},{act:'Kraft',times:1,dur:'~25 Min'}]
   ]},
   'Sandra':{mode:'strict', goal:'Fitness & Wohlbefinden', phases:[
-    [{act:'Schwimmen',times:2},{act:'Kraft',times:1}],
-    [{act:'Schwimmen',times:2},{act:'Walking',times:1},{act:'Kraft',times:1}],
-    [{act:'Schwimmen',times:3},{act:'Kraft',times:1}]
+    [{act:'Schwimmen',times:2,dur:'15 Min'},{act:'Kraft',times:1,dur:'~15 Min'}],
+    [{act:'Schwimmen',times:2,dur:'20 Min'},{act:'Walking',times:1,dur:'30 Min'},{act:'Kraft',times:1,dur:'~20 Min'}],
+    [{act:'Schwimmen',times:3,dur:'25–30 Min'},{act:'Kraft',times:1,dur:'~25 Min'}]
   ]},
   'Jakob':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    [{act:null,times:3}],
-    [{act:null,times:3}],
-    [{act:null,times:4}]
+    {ziel:3, todo:['🚴 Radrunde um den Hof','🏊 10 Min Pool toben','🚣 200 m rudern']},
+    {ziel:3, todo:['🏊 Gegenstrom: wer hält länger?','🚴 Radtour mit Paul','🚣 500 m-Duell gegen Paul']},
+    {ziel:4, todo:['🚣 500 m – deinen Rekord knacken','🚴 große Tour','🏊 Pool-Wettschwimmen','🏃 Hof-Sprint gegen Paul']}
   ]},
   'Paul':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    [{act:null,times:3}],
-    [{act:null,times:3}],
-    [{act:null,times:4}]
+    {ziel:3, todo:['🚴 Radrunde mit Papa','🏊 10 Min Pool toben','🚣 200 m rudern']},
+    {ziel:3, todo:['🚴 Radtour mit Papa','🚣 500 m-Duell gegen Jakob','🏊 Pool-Spiele']},
+    {ziel:4, todo:['🚣 500 m – schneller als Jakob?','🚴 große Tour mit Papa','🏊 Pool-Wettschwimmen','🏃 Hof-Sprint gegen Jakob']}
   ]}
 };
 
@@ -401,43 +409,40 @@ function renderPlan(scores){
     var byAct=sc.byAct||{};
     var totalCount=sc.count||0;
 
-    // Zielzeilen + Fortschritt berechnen
-    var lines=[], allDone=true;
     if(conf.mode==='strict'){
+      // Erwachsene: ein Chip je Sportart, mit Dauer
+      var allDone=true, chips='', nextAct=null;
       phase.forEach(function(z){
-        var done=byAct[z.act]||0;
-        var ok=done>=z.times;
-        if(!ok)allDone=false;
+        var done=byAct[z.act]||0, ok=done>=z.times;
+        if(!ok){allDone=false; if(!nextAct)nextAct=z.act;}
         var ic=ACTS.find(function(a){return a.id===z.act;});
-        lines.push({label:(ic?ic.ic:'')+' '+z.act, done:Math.min(done,z.times), ziel:z.times, ok:ok});
+        chips+='<span class="chip '+(ok?'done':'')+'">'+(ic?ic.ic:'')+' '+z.act+
+               ' '+(ok?'✓':Math.min(done,z.times)+'/'+z.times)+
+               '<small> · '+z.dur+'</small></span>';
       });
+      h+='<div class="pcard"'+(allDone?' style="opacity:.6"':'')+'>'+
+         '<div class="av">'+(allDone?'✅':p.emoji)+'</div>'+
+         '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
+           '<div class="chips">'+chips+'</div></div>'+
+         (allDone?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\''+(nextAct||'')+'\')">+</button>')+
+         '</div>';
     } else {
-      var z=phase[0];
-      var done=totalCount;
-      var ok=done>=z.times;
-      if(!ok)allDone=false;
-      lines.push({label:'🏃 Bewegung', done:Math.min(done,z.times), ziel:z.times, ok:ok});
+      // Kinder: Gesamtziel + konkrete Vorschläge (zählen offen)
+      var ziel=phase.ziel, done=Math.min(totalCount,ziel), ok=done>=ziel;
+      var todos=phase.todo.map(function(t,i){
+        var erl=i<totalCount;  // erste N Vorschläge optisch abgehakt
+        return '<div class="todo'+(erl?' done':'')+'">'+(erl?'✓':'•')+' '+t+'</div>';
+      }).join('');
+      h+='<div class="pcard col'+(ok?'':'')+'"'+(ok?' style="opacity:.6"':'')+'>'+
+         '<div class="prow">'+
+           '<div class="av">'+(ok?'✅':p.emoji)+'</div>'+
+           '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
+             '<div class="chips"><span class="chip '+(ok?'done':'')+'">🏃 Bewegung '+(ok?'✓':done+'/'+ziel)+'</span></div></div>'+
+           (ok?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\'\')">+</button>')+
+         '</div>'+
+         (ok?'':'<div class="todos">'+todos+'</div>')+
+         '</div>';
     }
-
-    // erste offene Sportart für den +Knopf (bei 'any' egal -> Standard)
-    var nextAct=null;
-    if(conf.mode==='strict'){
-      for(var i=0;i<phase.length;i++){var d=byAct[phase[i].act]||0; if(d<phase[i].times){nextAct=phase[i].act;break;}}
-    }
-
-    // Ziel-Chips
-    var chips='';
-    lines.forEach(function(l){
-      chips+='<span class="chip '+(l.ok?'done':'')+'">'+l.label+' '+
-             (l.ok?'✓':l.done+'/'+l.ziel)+'</span>';
-    });
-
-    h+='<div class="pcard"'+(allDone?' style="opacity:.6"':'')+'>'+
-       '<div class="av">'+(allDone?'✅':p.emoji)+'</div>'+
-       '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
-         '<div class="chips">'+chips+'</div></div>'+
-       (allDone?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\''+(nextAct||'')+'\')">+</button>')+
-       '</div>';
   });
   document.getElementById('plan').innerHTML=h;
 }
