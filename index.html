@@ -275,6 +275,7 @@ var ACTS = [
   {id:'Schwimmen',ic:'🏊', pts:4},
   {id:'Fahrrad',  ic:'🚴', pts:3},
   {id:'Walking',  ic:'🚶', pts:2},
+  {id:'Reiten',   ic:'🐎', pts:2, per:30},
   {id:'Kraft',    ic:'💪', pts:4}
 ];
 var SWIM_BONUS_PERSON = 'Sandra';
@@ -300,14 +301,10 @@ var PROGRAM = {
     [{act:'Schwimmen',times:3,dur:'25–30 Min'},{act:'Kraft',times:1,dur:'~25 Min'}]
   ]},
   'Jakob':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    {ziel:3, todo:['🚴 Radrunde um den Hof','🏊 10 Min Pool toben','🚣 200 m rudern']},
-    {ziel:3, todo:['🏊 Gegenstrom: wer hält länger?','🚴 Radtour mit Paul','🚣 500 m-Duell gegen Paul']},
-    {ziel:4, todo:['🚣 500 m – deinen Rekord knacken','🚴 große Tour','🏊 Pool-Wettschwimmen','🏃 Hof-Sprint gegen Paul']}
+    {ziel:3},{ziel:3},{ziel:4}
   ]},
   'Paul':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    {ziel:3, todo:['🚴 Radrunde mit Papa','🏊 10 Min Pool toben','🚣 200 m rudern']},
-    {ziel:3, todo:['🚴 Radtour mit Papa','🚣 500 m-Duell gegen Jakob','🏊 Pool-Spiele']},
-    {ziel:4, todo:['🚣 500 m – schneller als Jakob?','🚴 große Tour mit Papa','🏊 Pool-Wettschwimmen','🏃 Hof-Sprint gegen Jakob']}
+    {ziel:3},{ziel:3},{ziel:4}
   ]}
 };
 
@@ -427,20 +424,13 @@ function renderPlan(scores){
          (allDone?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\''+(nextAct||'')+'\')">+</button>')+
          '</div>';
     } else {
-      // Kinder: Gesamtziel + konkrete Vorschläge (zählen offen)
+      // Kinder: nur Gesamtziel, jede Bewegung zählt
       var ziel=phase.ziel, done=Math.min(totalCount,ziel), ok=done>=ziel;
-      var todos=phase.todo.map(function(t,i){
-        var erl=i<totalCount;  // erste N Vorschläge optisch abgehakt
-        return '<div class="todo'+(erl?' done':'')+'">'+(erl?'✓':'•')+' '+t+'</div>';
-      }).join('');
-      h+='<div class="pcard col'+(ok?'':'')+'"'+(ok?' style="opacity:.6"':'')+'>'+
-         '<div class="prow">'+
-           '<div class="av">'+(ok?'✅':p.emoji)+'</div>'+
-           '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
-             '<div class="chips"><span class="chip '+(ok?'done':'')+'">🏃 Bewegung '+(ok?'✓':done+'/'+ziel)+'</span></div></div>'+
-           (ok?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\'\')">+</button>')+
-         '</div>'+
-         (ok?'':'<div class="todos">'+todos+'</div>')+
+      h+='<div class="pcard"'+(ok?' style="opacity:.6"':'')+'>'+
+         '<div class="av">'+(ok?'✅':p.emoji)+'</div>'+
+         '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
+           '<div class="chips"><span class="chip '+(ok?'done':'')+'">🏃 Bewegung '+(ok?'✓':done+'/'+ziel)+'</span></div></div>'+
+         (ok?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\'\')">+</button>')+
          '</div>';
     }
   });
@@ -462,7 +452,8 @@ function quick(person,act){
 function ptsFor(person,act,min){
   var a=ACTS.find(function(x){return x.id===act;});
   var base=a?a.pts:2;
-  var p=(min/10)*base;
+  var per=(a&&a.per)?a.per:10;   // Reiten: 2 Pkt pro 30 Min, sonst pro 10 Min
+  var p=(min/per)*base;
   if(person===SWIM_BONUS_PERSON && act==='Schwimmen'){p+=(min/10)*1;}
   return Math.round(p);
 }
