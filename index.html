@@ -18,6 +18,7 @@
     --blue:#0a66d6;--blue-dark:#084ea3;--blue-soft:#eaf2fd;
     --bg:#f4f6f8;--card:#ffffff;--ink:#1c2b3a;--ink2:#5b6b7b;--muted:#8a98a6;
     --line:#e6eaee;--green:#2fbf71;--gold:#f6b93b;--pink:#e84393;
+    --andreas:#0a66d6;--sandra:#e84393;
     --shadow:0 1px 3px rgba(20,40,60,.06), 0 6px 18px rgba(20,40,60,.05);
     --navh:64px;
   }
@@ -27,24 +28,39 @@
     min-height:100%;padding:0;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   .wrap{max-width:480px;margin:0 auto;padding:0 16px}
 
-  /* Topbar */
   .topbar{background:var(--blue);color:#fff;padding:18px 16px 16px;position:sticky;top:0;z-index:20;
     box-shadow:0 2px 10px rgba(10,102,214,.25)}
   .topbar .inner{max-width:480px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
   .brand{font-size:22px;font-weight:800;letter-spacing:-.3px}
   .brand span{opacity:.85;font-weight:600}
   .brand-sub{font-size:12px;opacity:.85;font-weight:500;margin-top:1px}
-  .topstreak{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);
-    padding:7px 12px;border-radius:30px;font-weight:700;font-size:15px}
+  .topstreak{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);padding:7px 12px;border-radius:30px;font-weight:700;font-size:15px}
 
   .sec{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:22px 4px 10px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
 
-  /* Tab-Inhalte */
   .tabview{display:none}
   .tabview.active{display:block;padding-bottom:calc(var(--navh) + 56px + env(safe-area-inset-bottom,0px))}
 
-  /* Ring */
+  /* ===== Duell (prominent) ===== */
+  .duell{margin-top:14px;padding:20px 18px;background:linear-gradient(135deg,#0a66d6,#3b1f8f);color:#fff;position:relative;overflow:hidden}
+  .duell::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.14),transparent 60%)}
+  .duell .dh{position:relative;text-align:center;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+  .duell .fight{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+  .fighter{text-align:center}
+  .fighter .fav{width:64px;height:64px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:30px;background:rgba(255,255,255,.15);border:2.5px solid rgba(255,255,255,.5)}
+  .fighter.lead .fav{border-color:var(--gold);box-shadow:0 0 20px rgba(246,185,59,.6)}
+  .fighter .fn{font-size:15px;font-weight:700}
+  .fighter .fp{font-size:32px;font-weight:800;line-height:1;margin-top:2px}
+  .fighter .fpl{font-size:10px;opacity:.75;text-transform:uppercase;letter-spacing:.5px}
+  .fighter .crown{font-size:16px;height:18px}
+  .vs{font-size:20px;font-weight:800;opacity:.9;background:rgba(255,255,255,.15);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .duell .bar{position:relative;height:10px;border-radius:10px;background:rgba(255,255,255,.2);margin-top:16px;overflow:hidden;display:flex}
+  .duell .bar .a{background:var(--gold)}
+  .duell .bar .s{background:#fff}
+  .duell .foot{position:relative;text-align:center;font-size:12px;margin-top:10px;opacity:.9;font-weight:600}
+
+  /* ===== Ring ===== */
   .progress{display:flex;align-items:center;gap:18px;padding:18px;margin-top:14px}
   .ring{position:relative;width:84px;height:84px;flex:0 0 auto}
   .ring svg{transform:rotate(-90deg)}
@@ -56,50 +72,27 @@
   .progress .info .s{font-size:13px;color:var(--ink2);margin-top:2px}
   .progress .info .ph{font-size:12px;color:var(--blue);font-weight:600;margin-top:6px}
 
-  /* Challenge */
-  .chal{margin-top:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:linear-gradient(120deg,var(--blue-soft),#fff)}
-  .chal .ic{font-size:30px}
-  .chal .c-t{flex:1}
-  .chal .c-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue)}
-  .chal .c-m{font-size:15px;font-weight:600;margin-top:2px}
-  .chal .c-l{font-size:12px;color:var(--ink2);margin-top:3px;font-weight:500}
-
-  /* Plan */
+  /* ===== Plan ===== */
   .plan{margin-top:14px;overflow:hidden}
   .pcard{display:flex;align-items:center;gap:13px;padding:14px 16px;border-bottom:1px solid var(--line)}
   .pcard:last-child{border-bottom:none}
   .pcard .av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto;background:var(--blue-soft)}
   .pcard .txt{flex:1;min-width:0}
   .pcard .nm{font-size:15px;font-weight:700}
-  .pcard .task{font-size:13px;color:var(--ink);margin-top:1px}
-  .pcard .goal{font-size:11px;color:var(--muted);margin-top:1px}
-  .pcard .nm .gtag{font-size:10px;font-weight:600;color:var(--muted);background:var(--bg);
-    padding:2px 7px;border-radius:20px;margin-left:4px;vertical-align:middle}
+  .pcard .nm .gtag{font-size:10px;font-weight:600;color:var(--muted);background:var(--bg);padding:2px 7px;border-radius:20px;margin-left:4px;vertical-align:middle}
   .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
-  .chip{font-size:11px;font-weight:600;color:var(--ink2);background:var(--bg);border:1px solid var(--line);
-    padding:3px 8px;border-radius:20px}
+  .chip{font-size:11px;font-weight:600;color:var(--ink2);background:var(--bg);border:1px solid var(--line);padding:3px 8px;border-radius:20px}
   .chip small{font-weight:500;color:var(--muted)}
   .chip.done{color:var(--green);border-color:rgba(47,191,113,.4);background:rgba(47,191,113,.08)}
   .chip.done small{color:var(--green);opacity:.7}
-  .pcard.col{display:block;padding:0}
-  .pcard.col .prow{display:flex;align-items:center;gap:13px;padding:14px 16px}
-  .todos{padding:0 16px 14px 16px;display:flex;flex-direction:column;gap:5px}
-  .todo{font-size:12px;color:var(--ink2);background:var(--bg);border-radius:10px;padding:7px 10px;font-weight:500}
-  .todo.done{color:var(--green);background:rgba(47,191,113,.08);text-decoration:line-through;opacity:.7}
-  .kraft{margin-top:14px;padding:0;overflow:hidden}
-  .kraft .kh{padding:14px 16px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
-  .kraft ul{list-style:none;padding:8px 16px 14px}
-  .kraft li{font-size:13px;color:var(--ink2);padding:6px 0;padding-left:18px;position:relative}
-  .kraft li::before{content:"•";position:absolute;left:4px;color:var(--blue);font-weight:700}
-  .pcard .add{width:34px;height:34px;border-radius:50%;border:2px solid var(--blue);background:#fff;color:var(--blue);
-    font-size:20px;font-weight:700;line-height:1;cursor:pointer;flex:0 0 auto;display:flex;align-items:center;justify-content:center;transition:.12s}
+  .pcard .add{width:34px;height:34px;border-radius:50%;border:2px solid var(--blue);background:#fff;color:var(--blue);font-size:20px;font-weight:700;line-height:1;cursor:pointer;flex:0 0 auto;display:flex;align-items:center;justify-content:center;transition:.12s}
   .pcard .add:active{background:var(--blue);color:#fff;transform:scale(.92)}
 
-  /* Rangliste */
+  /* ===== Rangliste ===== */
   .rank{margin-top:14px;overflow:hidden}
   .row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}
   .row:last-child{border-bottom:none}
-  .row.lead{background:linear-gradient(90deg,rgba(246,185,59,.1),#fff)}
+  .row.lead{background:linear-gradient(90deg,rgba(246,185,59,.12),#fff)}
   .row .medal{font-size:20px;width:26px;text-align:center}
   .row .nm{flex:1}
   .row .nm b{font-size:15px;font-weight:700;display:block}
@@ -108,56 +101,59 @@
   .row .pts small{font-size:11px;color:var(--muted);font-weight:600}
   .row .fire{color:var(--gold);font-weight:700}
 
-  /* Teams */
-  .teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-top:14px}
-  .team{padding:16px 10px;text-align:center}
-  .team.win{background:linear-gradient(180deg,rgba(47,191,113,.1),#fff)}
-  .team .em{font-size:24px}
-  .team .tn{font-size:12px;color:var(--ink2);font-weight:600;margin-top:2px}
-  .team .tp{font-size:26px;font-weight:800;color:var(--ink);margin-top:2px}
-  .team .mem{font-size:10px;color:var(--muted);margin-top:1px}
-  .vs{font-size:13px;font-weight:800;color:var(--pink)}
+  /* ===== Kraft ===== */
+  .kraft{margin-top:14px;padding:0;overflow:hidden}
+  .kraft .kh{padding:14px 16px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .kraft ul{list-style:none;padding:8px 16px 14px}
+  .kraft li{font-size:13px;color:var(--ink2);padding:6px 0;padding-left:18px;position:relative}
+  .kraft li::before{content:"•";position:absolute;left:4px;color:var(--blue);font-weight:700}
 
-  /* Eintragen */
+  /* ===== Siegertafel ===== */
+  .winners{margin-top:14px;overflow:hidden}
+  .wrow{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .wrow:last-child{border-bottom:none}
+  .wrow .wk{font-size:11px;color:var(--muted);font-weight:600;flex:0 0 auto;width:96px}
+  .wrow .wn{flex:1;font-size:15px;font-weight:700;display:flex;align-items:center;gap:7px}
+  .wrow .wp{font-size:14px;font-weight:800;color:var(--blue)}
+  .wrow.andreas .wn{color:var(--andreas)}
+  .wrow.sandra .wn{color:var(--sandra)}
+  .wtotals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .wtot{padding:16px;text-align:center}
+  .wtot .wtn{font-size:13px;font-weight:700}
+  .wtot .wtc{font-size:34px;font-weight:800;margin-top:4px}
+  .wtot.a .wtc{color:var(--andreas)} .wtot.s .wtc{color:var(--sandra)}
+  .wtot .wtl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .empty{text-align:center;color:var(--muted);padding:26px 16px;font-size:14px}
+
+  /* ===== Eintragen ===== */
   .entry{margin-top:14px;padding:18px}
   .lab{font-size:12px;font-weight:600;color:var(--ink2);margin:0 0 8px}
-  .who{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .who button{background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 4px;
-    font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:4px}
-  .who button .e{font-size:22px}
+  .who{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .who button{background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:13px 4px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .who button .e{font-size:24px}
   .who button.on{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
-
-  /* aufklappender Bereich */
   .drawer{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .3s ease,margin .3s ease}
-  .drawer.open{max-height:420px;opacity:1;margin-top:16px}
+  .drawer.open{max-height:560px;opacity:1;margin-top:16px}
   .acts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-  .acts button{background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:13px 8px;
-    font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:10px}
-  .acts button .ic{font-size:22px}
+  .acts button{background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 8px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:9px}
+  .acts button .ic{font-size:20px}
   .acts button.on{background:var(--blue);border-color:var(--blue);color:#fff}
   .dur{display:flex;align-items:center;gap:10px;margin-top:16px}
-  .dur input{flex:1;background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:13px;
-    font-family:inherit;font-size:20px;text-align:center;font-weight:700}
+  .dur input{flex:1;background:#fff;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:13px;font-family:inherit;font-size:20px;text-align:center;font-weight:700}
   .dur input:focus{outline:none;border-color:var(--blue)}
   .dur .unit{font-size:14px;color:var(--ink2);font-weight:600}
-  .save{width:100%;background:var(--blue);color:#fff;border:none;border-radius:13px;padding:15px;
-    font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:.12s;margin-top:16px}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+  .save{width:100%;background:var(--blue);color:#fff;border:none;border-radius:13px;padding:15px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:.12s;margin-top:16px}
   .save:active{background:var(--blue-dark);transform:scale(.99)}
   .save:disabled{opacity:.5}
 
-  /* Bottom-Nav */
-  .nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--navh) + env(safe-area-inset-bottom,0px));
-    padding-bottom:env(safe-area-inset-bottom,0px);background:#fff;border-top:1px solid var(--line);
-    display:flex;z-index:40;box-shadow:0 -2px 12px rgba(20,40,60,.05)}
+  .nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--navh) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:#fff;border-top:1px solid var(--line);display:flex;z-index:40;box-shadow:0 -2px 12px rgba(20,40,60,.05)}
   .nav .inner{max-width:480px;margin:0 auto;display:flex;width:100%}
-  .nav button{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;gap:3px;color:var(--muted);font-family:inherit;font-size:11px;font-weight:600;padding-top:6px}
+  .nav button{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font-family:inherit;font-size:11px;font-weight:600;padding-top:6px}
   .nav button .ni{font-size:22px;line-height:1}
   .nav button.on{color:var(--blue)}
 
-  .toast{position:fixed;left:50%;bottom:calc(var(--navh) + 18px);transform:translateX(-50%) translateY(160%);
-    background:var(--ink);color:#fff;padding:14px 22px;border-radius:30px;font-weight:700;font-size:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);transition:.35s cubic-bezier(.2,.9,.2,1);z-index:60}
+  .toast{position:fixed;left:50%;bottom:calc(var(--navh) + 18px);transform:translateX(-50%) translateY(160%);background:var(--ink);color:#fff;padding:14px 22px;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:.35s cubic-bezier(.2,.9,.2,1);z-index:60}
   .toast.show{transform:translateX(-50%) translateY(0)}
   .loading{text-align:center;color:var(--muted);padding:22px;font-size:14px}
   .err{text-align:center;color:var(--pink);padding:18px;font-size:13px;font-weight:600}
@@ -171,7 +167,7 @@
   <div class="inner">
     <div>
       <div class="brand">Kratz<span>Fit</span></div>
-      <div class="brand-sub">Familie in Bewegung</div>
+      <div class="brand-sub">Sandra vs. Andreas</div>
     </div>
     <div class="topstreak">🔥 <span id="topStreak">–</span></div>
   </div>
@@ -181,13 +177,39 @@
 <div id="tab-start" class="tabview active">
 <div class="wrap">
 
+  <div class="sec">Wettkampf der Woche</div>
+  <div class="card duell">
+    <div class="dh">⚔️ Duell dieser Woche</div>
+    <div class="fight">
+      <div class="fighter" id="fA">
+        <div class="crown" id="crownA"></div>
+        <div class="fav">🚣</div>
+        <div class="fn">Andreas</div>
+        <div class="fp" id="pA">0</div>
+        <div class="fpl">Punkte</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="fighter" id="fS">
+        <div class="crown" id="crownS"></div>
+        <div class="fav">🏊</div>
+        <div class="fn">Sandra</div>
+        <div class="fp" id="pS">0</div>
+        <div class="fpl">Punkte</div>
+      </div>
+    </div>
+    <div class="bar"><div class="a" id="barA" style="width:50%"></div><div class="s" id="barS" style="width:50%"></div></div>
+    <div class="foot" id="duellFoot">Noch keine Punkte – auf geht's!</div>
+  </div>
+
+  <div class="sec">Rangliste diese Woche</div>
+  <div class="card rank" id="rank"><div class="loading">lädt …</div></div>
+
   <div class="sec">Dein Programm</div>
   <div class="card progress">
     <div class="ring">
       <svg width="84" height="84" viewBox="0 0 84 84">
         <circle cx="42" cy="42" r="36" fill="none" stroke="#e6eaee" stroke-width="8"/>
-        <circle id="ringFill" cx="42" cy="42" r="36" fill="none" stroke="#0a66d6" stroke-width="8"
-          stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226"/>
+        <circle id="ringFill" cx="42" cy="42" r="36" fill="none" stroke="#0a66d6" stroke-width="8" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226"/>
       </svg>
       <div class="num"><b id="ringWeek">–</b><small>von 12</small></div>
     </div>
@@ -197,21 +219,6 @@
       <div class="ph" id="streakLine">–</div>
     </div>
   </div>
-
-  <div id="chal" class="card chal" style="display:none">
-    <div class="ic">🏆</div>
-    <div class="c-t">
-      <div class="c-h">Wochen-Challenge</div>
-      <div class="c-m" id="chalText"></div>
-      <div class="c-l" id="chalLead"></div>
-    </div>
-  </div>
-
-  <div class="sec">Rangliste diese Woche</div>
-  <div class="card rank" id="rank"><div class="loading">lädt …</div></div>
-
-  <div class="sec">Team-Duell</div>
-  <div class="card"><div class="teams" id="teams"></div></div>
 
   <div class="sec">Einheit eintragen</div>
   <div class="card entry">
@@ -225,6 +232,7 @@
         <input id="dur" type="number" inputmode="numeric" value="20" min="1" max="240">
         <span class="unit">Minuten</span>
       </div>
+      <div class="hint" id="durHint"></div>
       <button class="save" id="save" onclick="save()">Eintragen</button>
     </div>
   </div>
@@ -237,17 +245,26 @@
 <div class="wrap">
   <div class="sec">Diese Woche · <span id="planWeek">Woche –</span></div>
   <div class="card plan" id="plan"><div class="loading">lädt …</div></div>
-
   <div class="sec">Krafttraining – so geht's</div>
   <div class="card kraft" id="kraft"></div>
-
   <div class="sec">So läuft das Programm</div>
   <div class="card" style="padding:16px 18px;margin-top:14px;font-size:13px;color:var(--ink2);line-height:1.6">
-    Das 12-Wochen-Programm hat drei Phasen: zuerst Gewohnheit aufbauen, dann Intensität steigern, dann Routine festigen.
-    Bei den Erwachsenen zählt jede Sportart einzeln (z.B. 2× Schwimmen meint genau 2× Schwimmen). Bei Jakob und Paul zählt jede Bewegung.
-    Jede Aufgabe bekommt einen grünen Haken ✓, sobald das Wochenziel erreicht ist. Montag startet alles neu.
-    Tippe auf das <b style="color:var(--blue)">+</b> neben einem Namen, um eine Einheit einzutragen.
+    Drei Phasen über 12 Wochen: erst Gewohnheit, dann Intensität, dann Routine. Jede Sportart zählt einzeln – die Aufgabe bekommt einen grünen Haken ✓, sobald das Wochenziel erreicht ist.
+    Ab dem 3. Tag Streak in Folge gibt es täglich einen Extrapunkt. Am Wochenende wird der Sieger ermittelt, dann startet alles neu. Tippe auf das <b style="color:var(--blue)">+</b>, um eine Einheit einzutragen.
   </div>
+</div>
+</div>
+
+<!-- ===== TAB: SIEGERTAFEL ===== -->
+<div id="tab-win" class="tabview">
+<div class="wrap">
+  <div class="sec">Gesamtstand</div>
+  <div class="wtotals">
+    <div class="card wtot a"><div class="wtn">🚣 Andreas</div><div class="wtc" id="totA">0</div><div class="wtl">Wochensiege</div></div>
+    <div class="card wtot s"><div class="wtn">🏊 Sandra</div><div class="wtc" id="totS">0</div><div class="wtl">Wochensiege</div></div>
+  </div>
+  <div class="sec">Alle Wochengewinner</div>
+  <div class="card winners" id="winners"><div class="loading">lädt …</div></div>
 </div>
 </div>
 
@@ -256,32 +273,28 @@
   <div class="inner">
     <button id="nav-start" class="on" onclick="switchTab('start')"><span class="ni">🏠</span>Start</button>
     <button id="nav-plan" onclick="switchTab('plan')"><span class="ni">📋</span>Aufgaben</button>
+    <button id="nav-win" onclick="switchTab('win')"><span class="ni">🏆</span>Siegertafel</button>
   </div>
 </div>
 
 <div id="toast" class="toast"></div>
 
 <script>
-/* ====== KONFIG ====== */
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWH8cl7UT4cPbhLcEaJxRuGneSyT-OdO1njN2wdgBLE6_9yUBqjaFVVmT_JYjYysyJ/exec';
 
 var PEOPLE = [
   {name:'Andreas', emoji:'🚣'},
-  {name:'Sandra',  emoji:'🏊'},
-  {name:'Jakob',   emoji:'🚴'},
-  {name:'Paul',    emoji:'⚡'}
+  {name:'Sandra',  emoji:'🏊'}
 ];
-var TEAMS = {
-  'Wasser-Team':{members:['Andreas','Paul'], em:'🌊'},
-  'Strom-Team':{members:['Sandra','Jakob'], em:'⚡'}
-};
 var ACTS = [
   {id:'Rudern',   ic:'🚣', pts:4},
   {id:'Schwimmen',ic:'🏊', pts:4},
   {id:'Fahrrad',  ic:'🚴', pts:3},
   {id:'Walking',  ic:'🚶', pts:2},
   {id:'Reiten',   ic:'🐎', pts:2, per:30},
-  {id:'Kraft',    ic:'💪', pts:4}
+  {id:'Kraft',    ic:'💪', pts:4},
+  {id:'Brettspiel',ic:'🎲', pts:6, fixed:true},
+  {id:'Schach',   ic:'♟️', pts:10, fixed:true}
 ];
 var SWIM_BONUS_PERSON = 'Sandra';
 var PROGRAM_START = '2026-06-22';
@@ -292,49 +305,26 @@ var PHASES = [
   {to:12, name:'Phase 3 · Routine festigen'}
 ];
 
-/* mode 'strict' = jede Sportart einzeln zählen (Erwachsene), mit Dauer je Einheit
-   mode 'any'    = alle Bewegungen zählen aufs Gesamtziel (Kinder), mit konkreten Vorschlägen */
 var PROGRAM = {
-  'Andreas':{mode:'strict', goal:'Allgemeine Fitness & Energie', phases:[
+  'Andreas':{goal:'Allgemeine Fitness & Energie', phases:[
     [{act:'Rudern',times:1,dur:'10 Min locker'},{act:'Schwimmen',times:1,dur:'15 Min'},{act:'Kraft',times:1,dur:'~15 Min'}],
     [{act:'Rudern',times:2,dur:'15 Min'},{act:'Schwimmen',times:1,dur:'20 Min'},{act:'Kraft',times:1,dur:'~20 Min'}],
     [{act:'Rudern',times:2,dur:'20 Min, Intervalle'},{act:'Schwimmen',times:2,dur:'25 Min'},{act:'Kraft',times:1,dur:'~25 Min'}]
   ]},
-  'Sandra':{mode:'strict', goal:'Fitness & Wohlbefinden', phases:[
+  'Sandra':{goal:'Fitness & Wohlbefinden', phases:[
     [{act:'Schwimmen',times:2,dur:'15 Min'},{act:'Kraft',times:1,dur:'~15 Min'}],
     [{act:'Schwimmen',times:2,dur:'20 Min'},{act:'Walking',times:1,dur:'30 Min'},{act:'Kraft',times:1,dur:'~20 Min'}],
     [{act:'Schwimmen',times:3,dur:'25–30 Min'},{act:'Kraft',times:1,dur:'~25 Min'}]
-  ]},
-  'Jakob':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    {ziel:3},{ziel:3},{ziel:4}
-  ]},
-  'Paul':{mode:'any', goal:'Spaß & Bewegung', phases:[
-    {ziel:3},{ziel:3},{ziel:4}
   ]}
 };
 
-/* Konkrete Kraftübungen je Phase (für die Detailansicht) */
 var KRAFT = [
   {title:'Phase 1 · Grundlagen (1 Durchgang, ~15 Min)', items:[
-    'Kniebeugen (Stuhl zur Kontrolle): 2× 10',
-    'Liegestütz an Wand/Tischkante: 2× 8',
-    'Plank (Unterarmstütz): 2× 20 Sek',
-    'Ausfallschritte im Stand: 2× 6 pro Bein'
-  ]},
+    'Kniebeugen (Stuhl zur Kontrolle): 2× 10','Liegestütz an Wand/Tischkante: 2× 8','Plank (Unterarmstütz): 2× 20 Sek','Ausfallschritte im Stand: 2× 6 pro Bein']},
   {title:'Phase 2 · Mehr Volumen (2 Durchgänge, ~20 Min)', items:[
-    'Kniebeugen frei: 3× 12',
-    'Liegestütz auf Knien: 3× 8',
-    'Plank: 3× 30 Sek',
-    'Ausfallschritte gehend: 3× 8 pro Bein',
-    'Hüftheben (Glute Bridge): 3× 12'
-  ]},
+    'Kniebeugen frei: 3× 12','Liegestütz auf Knien: 3× 8','Plank: 3× 30 Sek','Ausfallschritte gehend: 3× 8 pro Bein','Hüftheben (Glute Bridge): 3× 12']},
   {title:'Phase 3 · Kraft aufbauen (3 Durchgänge, ~25 Min)', items:[
-    'Kniebeugen langsam (3 Sek runter): 3× 12',
-    'Liegestütz voll: 3× so viele wie möglich',
-    'Plank: 3× 45 Sek',
-    'Split Squat (hinterer Fuß erhöht): 3× 8 pro Bein',
-    'Hüftheben einbeinig: 3× 10 pro Bein'
-  ]}
+    'Kniebeugen langsam (3 Sek runter): 3× 12','Liegestütz voll: 3× so viele wie möglich','Plank: 3× 45 Sek','Split Squat (hinterer Fuß erhöht): 3× 8 pro Bein','Hüftheben einbeinig: 3× 10 pro Bein']}
 ];
 
 var selPerson=null, selAct=null;
@@ -351,37 +341,46 @@ function phaseIndex(week){
   return PHASES.length-1;
 }
 
-/* Tabs */
 function switchTab(t){
-  document.getElementById('tab-start').classList.toggle('active',t==='start');
-  document.getElementById('tab-plan').classList.toggle('active',t==='plan');
-  document.getElementById('nav-start').classList.toggle('on',t==='start');
-  document.getElementById('nav-plan').classList.toggle('on',t==='plan');
+  ['start','plan','win'].forEach(function(x){
+    document.getElementById('tab-'+x).classList.toggle('active',t===x);
+    document.getElementById('nav-'+x).classList.toggle('on',t===x);
+  });
   window.scrollTo({top:0});
 }
 
-/* Namen */
 function buildWho(){
   var h='';
   PEOPLE.forEach(function(p){
-    h+='<button class="'+(p.name===selPerson?'on':'')+'" onclick="pickP(\''+p.name+'\')">'+
-       '<span class="e">'+p.emoji+'</span>'+p.name+'</button>';
+    h+='<button class="'+(p.name===selPerson?'on':'')+'" onclick="pickP(\''+p.name+'\')"><span class="e">'+p.emoji+'</span>'+p.name+'</button>';
   });
   document.getElementById('who').innerHTML=h;
 }
 function buildActs(){
   var h='';
   ACTS.forEach(function(a){
-    h+='<button class="'+(a.id===selAct?'on':'')+'" onclick="pickA(\''+a.id+'\')">'+
-       '<span class="ic">'+a.ic+'</span>'+a.id+'</button>';
+    h+='<button class="'+(a.id===selAct?'on':'')+'" onclick="pickA(\''+a.id+'\')"><span class="ic">'+a.ic+'</span>'+a.id+'</button>';
   });
   document.getElementById('acts').innerHTML=h;
 }
-function pickP(p){
-  selPerson=p;buildWho();
-  document.getElementById('drawer').classList.add('open');
+function pickP(p){selPerson=p;buildWho();document.getElementById('drawer').classList.add('open');}
+function pickA(a){selAct=a;buildActs();updateHint();}
+
+function updateHint(){
+  var hint=document.getElementById('durHint');
+  var durRow=document.querySelector('.dur');
+  var a=ACTS.find(function(x){return x.id===selAct;});
+  if(a&&a.fixed){
+    durRow.style.display='none';
+    hint.textContent=selAct+' zählt pro Partie: '+a.pts+' Punkte';
+  } else if(a&&a.per){
+    durRow.style.display='flex';
+    hint.textContent=selAct+': '+a.pts+' Punkte pro '+a.per+' Min';
+  } else {
+    durRow.style.display='flex';
+    hint.textContent='';
+  }
 }
-function pickA(a){selAct=a;buildActs();}
 
 function renderPhase(){
   var week=currentWeek(), capped=Math.min(week,12), pi=phaseIndex(week);
@@ -392,60 +391,36 @@ function renderPhase(){
   document.getElementById('ringFill').style.strokeDashoffset=off;
   renderKraft(pi);
 }
-
 function renderKraft(pi){
   var k=KRAFT[Math.min(pi,KRAFT.length-1)];
-  var li=k.items.map(function(x){return '<li>'+x+'</li>';}).join('');
-  document.getElementById('kraft').innerHTML=
-    '<div class="kh">💪 '+k.title+'</div><ul>'+li+'</ul>';
+  document.getElementById('kraft').innerHTML='<div class="kh">💪 '+k.title+'</div><ul>'+k.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
 }
 
 function renderPlan(scores){
-  scores = scores || lastScores;
+  scores=scores||lastScores;
   var week=currentWeek(), pi=phaseIndex(week);
   var h='';
   PEOPLE.forEach(function(p){
     var conf=PROGRAM[p.name];
     var phase=conf.phases[pi];
-    var sc=scores[p.name]||{};
-    var byAct=sc.byAct||{};
-    var totalCount=sc.count||0;
-
-    if(conf.mode==='strict'){
-      // Erwachsene: ein Chip je Sportart, mit Dauer
-      var allDone=true, chips='', nextAct=null;
-      phase.forEach(function(z){
-        var done=byAct[z.act]||0, ok=done>=z.times;
-        if(!ok){allDone=false; if(!nextAct)nextAct=z.act;}
-        var ic=ACTS.find(function(a){return a.id===z.act;});
-        chips+='<span class="chip '+(ok?'done':'')+'">'+(ic?ic.ic:'')+' '+z.act+
-               ' '+(ok?'✓':Math.min(done,z.times)+'/'+z.times)+
-               '<small> · '+z.dur+'</small></span>';
-      });
-      h+='<div class="pcard"'+(allDone?' style="opacity:.6"':'')+'>'+
-         '<div class="av">'+(allDone?'✅':p.emoji)+'</div>'+
-         '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
-           '<div class="chips">'+chips+'</div></div>'+
-         (allDone?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\''+(nextAct||'')+'\')">+</button>')+
-         '</div>';
-    } else {
-      // Kinder: nur Gesamtziel, jede Bewegung zählt
-      var ziel=phase.ziel, done=Math.min(totalCount,ziel), ok=done>=ziel;
-      h+='<div class="pcard"'+(ok?' style="opacity:.6"':'')+'>'+
-         '<div class="av">'+(ok?'✅':p.emoji)+'</div>'+
-         '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div>'+
-           '<div class="chips"><span class="chip '+(ok?'done':'')+'">🏃 Bewegung '+(ok?'✓':done+'/'+ziel)+'</span></div></div>'+
-         (ok?'':'<button class="add" title="eintragen" onclick="quick(\''+p.name+'\',\'\')">+</button>')+
-         '</div>';
-    }
+    var byAct=(scores[p.name]&&scores[p.name].byAct)||{};
+    var allDone=true, chips='', nextAct=null;
+    phase.forEach(function(z){
+      var done=byAct[z.act]||0, ok=done>=z.times;
+      if(!ok){allDone=false; if(!nextAct)nextAct=z.act;}
+      var ic=ACTS.find(function(a){return a.id===z.act;});
+      chips+='<span class="chip '+(ok?'done':'')+'">'+(ic?ic.ic:'')+' '+z.act+' '+(ok?'✓':Math.min(done,z.times)+'/'+z.times)+'<small> · '+z.dur+'</small></span>';
+    });
+    h+='<div class="pcard"'+(allDone?' style="opacity:.6"':'')+'>'+
+       '<div class="av">'+(allDone?'✅':p.emoji)+'</div>'+
+       '<div class="txt"><div class="nm">'+p.name+' <span class="gtag">'+conf.goal+'</span></div><div class="chips">'+chips+'</div></div>'+
+       (allDone?'':'<button class="add" onclick="quick(\''+p.name+'\',\''+(nextAct||'')+'\')">+</button>')+'</div>';
   });
   document.getElementById('plan').innerHTML=h;
 }
 
-/* aus Aufgaben-Tab heraus eintragen: zum Start-Tab wechseln, Person+Sportart vorwählen */
 function quick(person,act){
-  selPerson=person;selAct=act||null;
-  buildWho();buildActs();
+  selPerson=person;selAct=act||null;buildWho();buildActs();updateHint();
   document.getElementById('drawer').classList.add('open');
   switchTab('start');
   setTimeout(function(){
@@ -456,9 +431,10 @@ function quick(person,act){
 
 function ptsFor(person,act,min){
   var a=ACTS.find(function(x){return x.id===act;});
-  var base=a?a.pts:2;
-  var per=(a&&a.per)?a.per:10;   // Reiten: 2 Pkt pro 30 Min, sonst pro 10 Min
-  var p=(min/per)*base;
+  if(!a) return 0;
+  if(a.fixed) return a.pts;                 // Brettspiel/Schach: pro Partie
+  var per=a.per?a.per:10;
+  var p=(min/per)*a.pts;
   if(person===SWIM_BONUS_PERSON && act==='Schwimmen'){p+=(min/10)*1;}
   return Math.round(p);
 }
@@ -466,8 +442,9 @@ function ptsFor(person,act,min){
 function save(){
   if(!selPerson){toast('Erst Namen wählen');return;}
   if(!selAct){toast('Sportart wählen');return;}
-  var min=parseInt(document.getElementById('dur').value,10);
-  if(!min||min<1){toast('Dauer eingeben');return;}
+  var a=ACTS.find(function(x){return x.id===selAct;});
+  var min = (a&&a.fixed) ? 0 : parseInt(document.getElementById('dur').value,10);
+  if(!(a&&a.fixed) && (!min||min<1)){toast('Dauer eingeben');return;}
   var btn=document.getElementById('save');
   btn.disabled=true;btn.textContent='Speichert …';
   var pts=ptsFor(selPerson,selAct,min);
@@ -486,72 +463,86 @@ function load(){
   jsonp('data',{},function(res){
     if(!res||!res.ok){document.getElementById('rank').innerHTML='<div class="err">Verbindung fehlgeschlagen</div>';return;}
     lastScores=res.scores||{};
+    renderDuell(lastScores);
     renderRank(lastScores);
-    renderTeams(lastScores);
-    renderStreak(res.streak||0);
-    renderChal(res.challenge,lastScores);
+    renderStreak(lastScores);
     renderPlan(lastScores);
+    renderWinners(res.winners||[]);
   });
 }
 
+function renderDuell(scores){
+  var a=(scores['Andreas']&&scores['Andreas'].pts)||0;
+  var s=(scores['Sandra']&&scores['Sandra'].pts)||0;
+  document.getElementById('pA').textContent=a;
+  document.getElementById('pS').textContent=s;
+  var tot=a+s;
+  var aw = tot>0 ? Math.round(a/tot*100) : 50;
+  document.getElementById('barA').style.width=aw+'%';
+  document.getElementById('barS').style.width=(100-aw)+'%';
+  document.getElementById('fA').classList.toggle('lead',a>s);
+  document.getElementById('fS').classList.toggle('lead',s>a);
+  document.getElementById('crownA').textContent=(a>s&&a>0)?'👑':'';
+  document.getElementById('crownS').textContent=(s>a&&s>0)?'👑':'';
+  var foot=document.getElementById('duellFoot');
+  if(tot===0){foot.textContent='Noch keine Punkte – auf geht\u0027s!';}
+  else if(a===s){foot.textContent='Kopf an Kopf – '+a+':'+s+'!';}
+  else{var lead=a>s?'Andreas':'Sandra'; foot.textContent=lead+' führt mit '+Math.abs(a-s)+' Punkten';}
+}
+
 function renderRank(scores){
-  var medals=['🥇','🥈','🥉','🎽'];
+  var medals=['🥇','🥈'];
   var arr=PEOPLE.map(function(p){
-    var s=scores[p.name]||{};
-    return {p:p.name,emoji:p.emoji,pts:s.pts||0,min:s.min||0,streak:s.streak||0};
+    var sc=scores[p.name]||{};
+    return {p:p.name,emoji:p.emoji,pts:sc.pts||0,min:sc.min||0,streak:sc.streak||0};
   });
   arr.sort(function(a,b){return b.pts-a.pts;});
   var h='';
   arr.forEach(function(r,i){
     var lead=(i===0&&r.pts>0)?'lead':'';
     var fire=r.streak>1?' · <span class="fire">🔥'+r.streak+'</span>':'';
-    h+='<div class="row '+lead+'">'+
-       '<div class="medal">'+medals[i]+'</div>'+
+    h+='<div class="row '+lead+'"><div class="medal">'+medals[i]+'</div>'+
        '<div class="nm"><b>'+r.emoji+' '+r.p+'</b><small>'+r.min+' Min diese Woche'+fire+'</small></div>'+
        '<div class="pts">'+r.pts+'<small> Pkt</small></div></div>';
   });
   document.getElementById('rank').innerHTML=h;
 }
 
-function renderTeams(scores){
-  var keys=Object.keys(TEAMS);
-  var data=keys.map(function(tn){
-    var t=TEAMS[tn];
-    var sum=t.members.reduce(function(s,p){return s+((scores[p]&&scores[p].pts)||0);},0);
-    return {tn:tn,em:t.em,pts:sum,mem:t.members.join(' + ')};
-  });
-  var max=Math.max.apply(null,data.map(function(d){return d.pts;}));
-  function box(d){
-    var win=(d.pts===max&&d.pts>0)?'win':'';
-    return '<div class="team '+win+'"><div class="em">'+d.em+'</div><div class="tn">'+d.tn+
-           '</div><div class="tp">'+d.pts+'</div><div class="mem">'+d.mem+'</div></div>';
-  }
-  document.getElementById('teams').innerHTML=box(data[0])+'<div class="vs">VS</div>'+box(data[1]);
-}
-
-function renderStreak(s){
-  document.getElementById('topStreak').textContent=s;
+function renderStreak(scores){
+  // höchster Streak beider zeigt die Familien-Flamme oben
+  var best=0, bestPerson=null;
+  PEOPLE.forEach(function(p){var s=(scores[p.name]&&scores[p.name].streak)||0; if(s>best){best=s;bestPerson=p.name;}});
+  document.getElementById('topStreak').textContent=best;
   var line=document.getElementById('streakLine');
-  if(s>=7){line.textContent='🔥 '+s+' Tage Streak · Bonus aktiv!';}
-  else if(s>0){line.textContent='🔥 '+s+' Tage · noch '+(7-s)+' bis Bonus';}
+  if(best>=3){line.textContent='🔥 '+best+' Tage Streak · +'+(best-2)+' Bonuspunkte/Tag';}
+  else if(best>0){line.textContent='🔥 '+best+' Tage · ab Tag 3 gibt es Bonuspunkte';}
   else{line.textContent='Heute starten 🚀';}
 }
 
-function renderChal(ch,scores){
-  if(!ch){document.getElementById('chal').style.display='none';return;}
-  document.getElementById('chal').style.display='flex';
-  document.getElementById('chalText').textContent=ch.text||'';
-  var lead='';
-  if(ch.metric&&scores){
-    var best=null,bestV=-1;
-    PEOPLE.forEach(function(p){
-      var s=scores[p.name]||{};
-      var v=ch.metric==='min'?(s.min||0):(s.pts||0);
-      if(v>bestV){bestV=v;best=p.name;}
-    });
-    if(best&&bestV>0)lead='Vorne: '+best+' ('+bestV+(ch.metric==='min'?' Min':' Pkt')+')';
+function renderWinners(list){
+  // Gesamtstand
+  var totA=0, totS=0;
+  list.forEach(function(w){ if(w.winner==='Andreas')totA++; else if(w.winner==='Sandra')totS++; });
+  document.getElementById('totA').textContent=totA;
+  document.getElementById('totS').textContent=totS;
+
+  if(!list.length){
+    document.getElementById('winners').innerHTML='<div class="empty">Noch keine abgeschlossene Woche.<br>Der erste Sieger wird nächsten Montag gekürt.</div>';
+    return;
   }
-  document.getElementById('chalLead').textContent=lead;
+  var h='';
+  list.forEach(function(w){
+    var cls = w.winner==='Andreas'?'andreas':(w.winner==='Sandra'?'sandra':'');
+    var em = w.winner==='Andreas'?'🚣':(w.winner==='Sandra'?'🏊':'🤝');
+    h+='<div class="wrow '+cls+'"><div class="wk">'+fmtWeek(w.week)+'</div>'+
+       '<div class="wn">'+em+' '+w.winner+'</div><div class="wp">'+w.pts+' Pkt</div></div>';
+  });
+  document.getElementById('winners').innerHTML=h;
+}
+
+function fmtWeek(iso){
+  var p=iso.split('-'); if(p.length<3) return iso;
+  return 'KW ab '+p[2]+'.'+p[1]+'.';
 }
 
 function jsonp(action,params,cb){
